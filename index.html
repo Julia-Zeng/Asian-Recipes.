@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AsianRecipes</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        function createUser() {
+        const SUPABASE_URL = 'https://ytbfokayjuwdovzygubt.supabase.co/';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0YmZva2F5anV3ZG92enlndWJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NTMyNDAsImV4cCI6MjA3NjAyOTI0MH0.lZv12D29lHDWYvmmolZbGBjuB6JMwdZB1SVIE52YmVg';
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        async function createUser() { 
+            let email = document.getElementById("email-input").value;  
+            let password = document.getElementById("password-input").value; 
+            await db.from("Users").insert([{email: email, password: password}])
             alert("User created!")
         }
     </script>
 </head>
 <body>
     <h1>Create User</h1>
-    <input type="text"></input>
-    <input type="text">
+    <input type="text" id="email-input"> 
+    <input type="text" id="password-input">
     <button onclick="createUser()">Create User</button>
 </body>
 </html>
