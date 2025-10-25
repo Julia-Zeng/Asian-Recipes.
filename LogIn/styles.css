@@ -42,6 +42,15 @@ h1{
         color: #ffffff;
     }
 
+.button-container1 {
+    /*border: 3px solid blue; */
+    position: absolute;
+    left: 50%;
+    bottom: 200px;
+    transform: translate(-50%, 0);
+    width: auto;
+}
+
 .image-container1 img{
     /*border: 3px solid blue;*/
     position: absolute;
