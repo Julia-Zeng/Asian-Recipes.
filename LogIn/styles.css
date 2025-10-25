@@ -46,3 +46,10 @@ h1 {
     justify-content: center;
     margin-top: 20px;
 }
+
+.image-container1 {
+    display: flex;
+    justify-content: left;
+    max-width: 200px;
+    height: auto;
+}

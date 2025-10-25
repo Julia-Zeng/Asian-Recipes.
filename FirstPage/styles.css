@@ -1,0 +1,104 @@
+html {
+    /* border: 3px solid blue; */
+    background-color: #d4bc9f;
+}
+body {
+    /* border: 3px solid green; */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header {
+    display: flex;
+    /*justify-content: center;
+    align-items:flex-end;*/
+    /* border: 3px solid red;  */
+    /*height: 35vh;*/
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+}
+title-container{
+    display: flex;
+    /* justify-content: center;*/
+    align-items: center; 
+    border: 3px solid #ffffff;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #987f69;
+    padding: 1em;
+}
+
+.title-container h1 {
+    position: relative;
+    font-size: 50px;
+    margin: auto;
+    /* border: 3px solid red; */
+    text-align: center;
+    vertical-align: middle;
+}
+
+main {
+    /* border: 3px solid yellow; */
+    margin: 50px;
+}
+
+.button-container {
+    /* border: 3px solid red; */
+    margin: 20px;
+    display: flex;
+}
+
+.button-link {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-inline: auto;
+    font-size: 25px;
+    color: #ffffff;
+    width: 7em;
+    height: 3em;
+    background-color: #987f69;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.button-link:hover {
+    background-color: #7f6b58;
+}
+
+button {
+    position: relative;
+    margin-inline: auto;
+    font-size: 25px;
+    color: #ffffff;
+    width: 7em;
+    height: 3em;
+    background-color: #987f69;
+    border: none;
+    border-radius: 10px;
+}
+
+.image-container img{
+    /*border: 3px solid lightseagreen;*/
+    display: block;
+    max-width: 50%;
+    height: auto;
+    margin-left: -25px;
+    margin-top: -200px;
+}
+
+.image-container2 img{
+    /*border: 3px solid lightseagreen;*/
+    display: block;
+    max-width: 45%;
+    height: auto;
+    margin-left: 750px;
+    margin-top: -750px;
+}
