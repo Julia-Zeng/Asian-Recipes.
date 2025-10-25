@@ -18,10 +18,10 @@ header {
     align-items: center;
     margin-top: 80px;
 }
-title-container{
+.title-container{
     display: flex;
-    /* justify-content: center;*/
-    align-items: center; 
+    /* justify-content: center;
+    align-items: center; */
     border: 3px solid #ffffff;
     height: 200px;
     width: 200px;
@@ -38,6 +38,7 @@ title-container{
     /* border: 3px solid red; */
     text-align: center;
     vertical-align: middle;
+    
 }
 
 main {
@@ -84,21 +85,18 @@ button {
     border: none;
     border-radius: 10px;
 }
-
-.image-container img{
-    /*border: 3px solid lightseagreen;*/
-    display: block;
-    max-width: 50%;
-    height: auto;
-    margin-left: -25px;
-    margin-top: -200px;
+.image-container3 img{
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    left: 50px;
+    max-width: 320px;
 }
-
-.image-container2 img{
-    /*border: 3px solid lightseagreen;*/
-    display: block;
-    max-width: 45%;
-    height: auto;
-    margin-left: 750px;
-    margin-top: -750px;
+.image-container4 img{
+    /*border: 3px solid blue;*/
+    position: absolute;
+    display: flex;
+    max-width: 300px;
+    top: 0;
+    right: 30px;
 }
