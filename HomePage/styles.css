@@ -60,7 +60,7 @@ html {
     background-image: linear-gradient(#000, #000);
     background-repeat: no-repeat;
     background-position: center calc(100% - 12px);
-    background-size: 1000px 2px;
+    background-size: 800px 2px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -70,11 +70,83 @@ html {
     font-size: 60px;
 }
 
-.dumplings-container {
+.dumplings-container img{
+    width: 150px;
+    height: 160px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.dumplings-container{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin-top: 50px;
-    width: 40px;
-    height: 40px;
+    padding-left: 330px;
+}
+
+.ramen-container img{
+    width: 150px;
+    height: 160px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.ramen-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 50px;
+    padding-left: 330px;
+}
+
+.beefnoodle-container img{
+    width: 150px;
+    height: 160px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.beefnoodle-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 50px;
+    padding-left: 330px;
+}
+
+.butterchicken-container img{
+    width: 150px;
+    height: 160px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.butterchicken-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 50px;
+    padding-left: 330px;
+}
+
+.recipe-container {
+    /*border: 3px solid blue;*/
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding-left: 200px;
+}
+.recipe-container div {
+    margin-bottom: 50px;
+    padding-left: 85px;
+    margin-top: auto;
+}
+
+.dumplings-title h4, .ramen-title h4, .beefnoodle-title h4, .butterchicken-title h4 {
+    border: 3px solid red;
+    display: flex;
+    align-items: flex-end;
+    font-size: 16px;
 }
