@@ -46,12 +46,14 @@ html {
   font-size: 23px;
   background-color: #f5f2f0;
 }
+.sidebar a.active {
+  background-color: #42382e;
+  color: white;
+}
 
-#all-recipes {
-    /*border: 3px solid black;*/
-    background-color: #f5f2f0;
-    font-size: 23px;
-
+.sidebar a:hover:not(.active) {
+  background-color: #42382e;
+  color: white;
 }
 
 .header h1 {
@@ -65,7 +67,7 @@ html {
     align-items: center;
     text-align: center;
     margin-left: 250px;
-    margin-top: 60px;
+    margin-top: 40px;
     padding-bottom: 40px;
     font-size: 60px;
 }
@@ -81,8 +83,9 @@ html {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 50px;
-    padding-left: 330px;
+    flex-direction: column;
+    margin-top: 0px;
+    padding-left: 0px;
 }
 
 .ramen-container img{
@@ -96,8 +99,9 @@ html {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 50px;
-    padding-left: 330px;
+    flex-direction: column;
+    margin-top: 0px;
+    padding-left: 10px;
 }
 
 .beefnoodle-container img{
@@ -111,8 +115,9 @@ html {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 50px;
-    padding-left: 330px;
+    flex-direction: column;
+    margin-top: 0px;
+    padding-left: 10px;
 }
 
 .butterchicken-container img{
@@ -123,30 +128,109 @@ html {
     border-radius: 10px;
 }
 .butterchicken-container{
+    /*border: 3px solid green;*/
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 50px;
-    padding-left: 330px;
+    flex-direction: column;
+    margin-top: 0px;
+    padding-left: 0px;
 }
 
 .recipe-container {
-    /*border: 3px solid blue;*/
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 20px;
+    margin-left: 290px;
+    gap: 60px;
+}
+
+
+.sushi-container img{
+    width: 150px;
+    height: 160px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.sushi-container{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 10px;
-    padding-left: 200px;
-}
-.recipe-container div {
-    margin-bottom: 50px;
-    padding-left: 85px;
-    margin-top: auto;
+    flex-direction: column;
+    margin-top: 0px;
+    padding-left: 0px;
 }
 
-.dumplings-title h4, .ramen-title h4, .beefnoodle-title h4, .butterchicken-title h4 {
-    border: 3px solid red;
+.padthai-container img{
+    width: 150px;
+    height: 160px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.padthai-container{
     display: flex;
-    align-items: flex-end;
-    font-size: 16px;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 0px;
+    padding-left: 10px;
+}
+
+.bibimbap-container img{
+    width: 150px;
+    height: 160px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.bibimbap-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 0px;
+    padding-left: 10px;
+}   
+
+.miso-container img{
+    width: 150px;
+    height: 160px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.miso-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 0px;
+    padding-left: 10px;
+}  
+
+.recipe-container2 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 20px;
+    margin-left: 290px;
+    gap: 60px;
+}
+
+.searchbar {
+  overflow: hidden;
+  font-size: 20px;
+}
+
+.searchbar input[type=text] {
+  float: right;
+  padding: 6px;
+  border-radius: 20px;
+  margin-top: 8px;
+  margin-right: 16px;
 }
