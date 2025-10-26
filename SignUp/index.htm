@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Recipes - Sign in</title>
+    <title>Recipes - Log In</title>
 </head>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -18,9 +18,17 @@
             let email = document.getElementById("email-input").value;  
             let password = document.getElementById("password-input").value; 
             await db.from("Users").insert([{email: email, password: password}])
-            alert("User created!")
+            alert("User Created!")
         }
     </script>
+
+ <div class="image-container2">
+      <img src="/Images/Lantern 2.png" alt="Watercolor yellow lantern">
+  </div>
+
+  <div class="image-container3">
+      <img src="/Images/Lantern 2.png" alt="Watercolor yellow lantern 2">
+  </div>
 
 <script>
 async function addUser() {
@@ -77,15 +85,33 @@ deleteUser();
 </head>
 <body>
     <h1>Sign Up</h1>
-    <div class="input-container"> 
+    
+    <div class="email-container"> 
       <label for="email">Email:</label>
     <input type="text" id="email-input">
+    </div>
 
+    <div class="password-container">
     <div class="input-container input-container-password"> </div>
       <label for="password">Password:</label>
-    <input type="text" id="password-input">
+    <input type="password" id="password-input">
+    <label style="margin-left:8px;">
+      <input type="checkbox" id="show-password" onclick="togglePassword()">
+      Show password
+    </label>
+    </div>
     
-    <div class="button-container"> </div> 
+    <div class="button-container"> 
     <button onclick="createUser()">Create User</button>
+    </div>
+
+<script>
+function togglePassword() {
+  const pwd = document.getElementById('password-input');
+  const checked = document.getElementById('show-password').checked;
+  pwd.type = checked ? 'text' : 'password';
+}
+</script>
+
 </body>
 </html>

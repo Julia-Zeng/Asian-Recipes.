@@ -52,14 +52,14 @@ h1{
     width: 100px;
 }
 
-.image-container1 img{
+.image-container2 img{
     /*border: 3px solid blue;*/
     position: absolute;
     top: 0;
     left: 80px;
     max-width: 250px;
 }
-.image-container0 img{
+.image-container3 img{
     /*border: 3px solid blue;*/
     position: absolute;
     top: 0;

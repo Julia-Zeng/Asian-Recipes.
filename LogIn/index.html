@@ -18,7 +18,7 @@
             let email = document.getElementById("email-input").value;  
             let password = document.getElementById("password-input").value; 
             await db.from("Users").insert([{email: email, password: password}])
-            alert("User created!")
+            alert("User Loged In!")
         }
     </script>
 
@@ -85,27 +85,33 @@ deleteUser();
 </head>
 <body>
     <h1>Log In</h1>
-    <div class="input-container"> 
+    
+    <div class="email-container"> 
       <label for="email">Email:</label>
-    <input placeholder="Enter email" type="text" id="email-input"> </div>
-    <div class="input-password"> 
-      <label for="password">Password:</label>
-    <input placeholder="Enter password" id="password" type="password" name="password">
-        <label style="font-size: 0.9em; margin-left: 8px;">
-          <input type="checkbox" id="togglePassword" style="vertical-align: middle;"> Show Password
-        </label> 
+    <input type="text" id="email-input">
     </div>
-    <div class="button-container1">
-    <button onclick="createUser()">User Log in</button>
+
+    <div class="password-container">
+    <div class="input-container input-container-password"> </div>
+      <label for="password">Password:</label>
+    <input type="password" id="password-input">
+    <label style="margin-left:8px;">
+      <input type="checkbox" id="show-password" onclick="togglePassword()">
+      Show password
+    </label>
     </div>
     
-    <script>
-        const passwordInput = document.getElementById('password');
-        const togglePassword = document.getElementById('togglePassword');
-        togglePassword.addEventListener('change', function() {
-            passwordInput.type = this.checked ? 'text' : 'password';
-        });
-    </script>
+    <div class="button-container"> 
+    <button onclick="createUser()">User Log In</button>
+    </div>
+
+<script>
+function togglePassword() {
+  const pwd = document.getElementById('password-input');
+  const checked = document.getElementById('show-password').checked;
+  pwd.type = checked ? 'text' : 'password';
+}
+</script>
 
 </body>
 </html>
