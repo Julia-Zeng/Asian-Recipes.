@@ -20,7 +20,7 @@
           let password = document.getElementById("password-input").value; 
           await db.from("Users").insert([{email: email, password: password}])
           alert("User Created!")  
-          window.location.href = "../HomePage/index.html";
+          window.location.href = "../LogIn/index.html";
           }
     </script>
 
