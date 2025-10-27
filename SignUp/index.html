@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Recipes - Log In</title>
+    <title>Recipes - Sign Up</title>
 </head>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -13,14 +13,18 @@
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0YmZva2F5anV3ZG92enlndWJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NTMyNDAsImV4cCI6MjA3NjAyOTI0MH0.lZv12D29lHDWYvmmolZbGBjuB6JMwdZB1SVIE52YmVg';
         const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     </script>
+    
     <script>
-        async function createUser() { 
-            let email = document.getElementById("email-input").value;  
-            let password = document.getElementById("password-input").value; 
-            await db.from("Users").insert([{email: email, password: password}])
-            alert("User Created!")
-        }
+         async function createUser() { 
+          let email = document.getElementById("email-input").value;  
+          let password = document.getElementById("password-input").value; 
+          await db.from("Users").insert([{email: email, password: password}])
+          alert("User Created!")  
+          window.location.href = "../HomePage/index.html";
+          }
     </script>
+
+  
 
  <div class="image-container2">
       <img src="/Images/Lantern 2.png" alt="Watercolor yellow lantern">
@@ -29,19 +33,6 @@
   <div class="image-container3">
       <img src="/Images/Lantern 2.png" alt="Watercolor yellow lantern 2">
   </div>
-
-<script>
-async function addUser() {
-  const { data, error } = await supabase
-    .from('users')
-    .insert([{ name: 'Alice', email: 'alice@example.com' }]);
-
-  if (error) console.error('Insert error:', error);
-  else console.log('Inserted:', data);
-}
-addUser();
-</script>
-
 
 <script>
 async function getUsers() {

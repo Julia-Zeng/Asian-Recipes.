@@ -14,12 +14,20 @@
         const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     </script>
     <script>
-        async function createUser() { 
-            let email = document.getElementById("email-input").value;  
-            let password = document.getElementById("password-input").value; 
-            await db.from("Users").insert([{email: email, password: password}])
-            alert("User Loged In!")
+      async function logInUser() {
+        let email = document.getElementById("email-input").value;
+        let password = document.getElementById("password-input").value;
+        const { data, error } = await db.from('Users').select('*').eq('email', email).eq('password', password);
+        if (error) {
+          alert("Error logging in!");
+          return;
         }
+        if (data && data.length > 0) {
+          window.location.href = "../HomePage/index.html";
+        } else {
+          alert("Invalid email or password.");
+        }
+      }
     </script>
 
  <div class="image-container1">
@@ -29,18 +37,6 @@
   <div class="image-container0">
       <img src="/Images/Lantern 1.png" alt="Watercolor yellow lantern 2">
   </div>
-
-<script>
-async function addUser() {
-  const { data, error } = await supabase
-    .from('users')
-    .insert([{ name: 'Alice', email: 'alice@example.com' }]);
-
-  if (error) console.error('Insert error:', error);
-  else console.log('Inserted:', data);
-}
-addUser();
-</script>
 
 
 <script>
@@ -102,7 +98,7 @@ deleteUser();
     </div>
     
     <div class="button-container"> 
-    <button onclick="createUser()">User Log In</button>
+    <button onclick="logInUser()">User Log In</button>
     </div>
 
 <script>
