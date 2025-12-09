@@ -31,11 +31,11 @@ h1 {
     padding-bottom: 20px;
     margin-left: 200px;
     margin-right: 200px;
-    border-bottom: 3px solid #000;
+    border-bottom: 1px solid #000;
 }
 
 h3 {
-    border: 3px solid orange;
+    /*border: 3px solid orange;*/
     font-size: 25px;
     /* Change the color of the word Easy to green only*/
     color: black;
@@ -86,3 +86,18 @@ label input[type=checkbox]:checked + span{
   text-decoration: line-through;
 }
 
+.steps {
+    /*border: 3px solid green;*/
+    font-size: 16px;
+    color: black;
+    text-align: left;
+    padding-left: 25px;
+    padding-bottom: 30px;
+    padding-top: 1px;
+    margin-top: 15px;
+    margin-bottom: 50px;
+    margin-left: 500px; /* moved to the right */
+    margin-right: 40px;
+    background-color: #987f69;
+    border-radius: 10px;
+}
