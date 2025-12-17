@@ -35,25 +35,26 @@ html {
 }
 
 .sidebar a {
-  /*border: 3px solid lightseagreen;*/
-  display: block;
-  color: #42382e;
-  text-decoration: none;
-  margin-bottom: 60px;
-  padding-left: 65px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 23px;
-  background-color: #f5f2f0;
+    /*border: 3px solid lightseagreen;*/
+    display: block;
+    color: #42382e;
+    text-decoration: none;
+    margin-bottom: 60px;
+    padding-left: 65px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 23px;
+    background-color: #f5f2f0;
 }
+
 .sidebar a.active {
-  background-color: #42382e;
-  color: white;
+    background-color: #42382e;
+    color: white;
 }
 
 .sidebar a:hover:not(.active) {
-  background-color: #42382e;
-  color: white;
+    background-color: #42382e;
+    color: white;
 }
 
 .header h1 {
@@ -72,14 +73,15 @@ html {
     font-size: 60px;
 }
 
-.dumplings-container img{
+.dumplings-container img {
     width: 150px;
     height: 160px;
     object-fit: cover;
     overflow: hidden;
     border-radius: 10px;
 }
-.dumplings-container{
+
+.dumplings-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -88,14 +90,15 @@ html {
     padding-left: 0px;
 }
 
-.ramen-container img{
+.ramen-container img {
     width: 150px;
     height: 160px;
     object-fit: cover;
     overflow: hidden;
     border-radius: 10px;
 }
-.ramen-container{
+
+.ramen-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -104,14 +107,15 @@ html {
     padding-left: 10px;
 }
 
-.beefnoodle-container img{
+.beefnoodle-container img {
     width: 150px;
     height: 160px;
     object-fit: cover;
     overflow: hidden;
     border-radius: 10px;
 }
-.beefnoodle-container{
+
+.beefnoodle-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -120,14 +124,15 @@ html {
     padding-left: 10px;
 }
 
-.butterchicken-container img{
+.butterchicken-container img {
     width: 150px;
     height: 160px;
     object-fit: cover;
     overflow: hidden;
     border-radius: 10px;
 }
-.butterchicken-container{
+
+.butterchicken-container {
     /*border: 3px solid green;*/
     display: flex;
     justify-content: flex-start;
@@ -145,17 +150,19 @@ html {
     margin-top: 20px;
     margin-left: 290px;
     gap: 60px;
+    flex-wrap: wrap;
 }
 
 
-.sushi-container img{
+.sushi-container img {
     width: 150px;
     height: 160px;
     object-fit: cover;
     overflow: hidden;
     border-radius: 10px;
 }
-.sushi-container{
+
+.sushi-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -164,14 +171,15 @@ html {
     padding-left: 0px;
 }
 
-.padthai-container img{
+.padthai-container img {
     width: 150px;
     height: 160px;
     object-fit: cover;
     overflow: hidden;
     border-radius: 10px;
 }
-.padthai-container{
+
+.padthai-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -180,37 +188,39 @@ html {
     padding-left: 10px;
 }
 
-.bibimbap-container img{
+.bibimbap-container img {
     width: 150px;
     height: 160px;
     object-fit: cover;
     overflow: hidden;
     border-radius: 10px;
 }
-.bibimbap-container{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 0px;
-    padding-left: 10px;
-}   
 
-.miso-container img{
-    width: 150px;
-    height: 160px;
-    object-fit: cover;
-    overflow: hidden;
-    border-radius: 10px;
-}
-.miso-container{
+.bibimbap-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     margin-top: 0px;
     padding-left: 10px;
-}  
+}
+
+.miso-container img {
+    width: 150px;
+    height: 160px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.miso-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 0px;
+    padding-left: 10px;
+}
 
 .recipe-container2 {
     display: flex;
@@ -223,14 +233,14 @@ html {
 }
 
 .searchbar {
-  overflow: hidden;
-  font-size: 20px;
+    overflow: hidden;
+    font-size: 20px;
 }
 
 .searchbar input[type=text] {
-  float: right;
-  padding: 6px;
-  border-radius: 20px;
-  margin-top: 8px;
-  margin-right: 16px;
+    float: right;
+    padding: 6px;
+    border-radius: 20px;
+    margin-top: 8px;
+    margin-right: 16px;
 }

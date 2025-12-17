@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Home Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://ytbfokayjuwdovzygubt.supabase.co/';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0YmZva2F5anV3ZG92enlndWJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NTMyNDAsImV4cCI6MjA3NjAyOTI0MH0.lZv12D29lHDWYvmmolZbGBjuB6JMwdZB1SVIE52YmVg';
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    </script>
 </head>
+
 <body>
     <div class="sidebar">
         <h3 class="sidebar-title" href="#">Menu Bar</h3>
@@ -14,82 +22,53 @@
         <a href="../myRecipes/index.html">My Recipes</a>
     </div>
 
-<div class="searchbar">
-  <div class="search-container">
-    <form action="/action_page.php">
-      <input type="text" placeholder="Search.." name="search">
-    </form>
-  </div>
-</div>
-
-<div class="content">
-    <div class="header">
-        <h1>
-            Popular Recipes
-        </h1>
+    <div class="searchbar">
+        <div class="search-container">
+            <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+            </form>
+        </div>
     </div>
-        <div class="recipe-container">
 
-            <div class="dumplings-container">
-                <a href="../chineseDumplings/index.html"> 
-                    <img src="/Images/Dumplings.JPG" alt="Dumplings image">
-                </a>
-                <h4 class="dumplings-title">Chinese Dumplings</h4>
-            </div>
-
-
-            <div class="ramen-container">
-                <a href="../chineseDumplings/index.html">
-                    <img src="/Images/Ramen.JPG" alt="Ramen image">
-                </a>
-                <h4>Japaese Pork Ramen</h4>
-            </div>
-
-            <div class="beefnoodle-container">
-                <a href="../chineseDumplings/index.html">   
-                    <img src="/Images/Beef Noodels.JPG" alt="Chinese Beef Noodles image">
-                </a>
-                <h4>Chinese Beef Noodles</h4>
-            </div>
-
-            <div class="butterchicken-container">
-                <a href="../chineseDumplings/index.html">
-                    <img src="/Images/Butter Chicken.JPG" alt="Butter Chicken Rice image">
-                </a>
-                <h4>Indian Butter Chicken Rice</h4>
-            </div>
+    <div class="content">
+        <div class="header">
+            <h1>
+                Popular Recipes
+            </h1>
         </div>
-        
-        <div class="recipe-container2">
-            
-            <div class="sushi-container">
-                <a href="../chineseDumplings/index.html">
-                    <img src="/Images/Sushi.JPG" alt="Sushi image">
-                </a>
-                <h4>Japanese Sushi</h4>
-            </div>
+        <div id="recipe-container" class="recipe-container">
 
-            <div class="padthai-container">
-                <a href="../chineseDumplings/index.html">
-                    <img src="/Images/Pad Thai.JPG" alt="Pad Thai image">
-                </a>
-                <h4>Thai Pad Thai</h4>
-            </div>
-
-            <div class="bibimbap-container">
-                <a href="../chineseDumplings/index.html">
-                    <img src="/Images/Bibimpap.JPG" alt="Bibimbap image">
-                </a>
-                <h4>Korean Bibimbap</h4>
-            </div>
-
-            <div class="miso-container">
-                <a href="../chineseDumplings/index.html">
-                    <img src="/Images/Miso Soup.JPG" alt="Miso Soup image">
-                </a>
-                <h4>Japanese Miso Soup</h4>
-            </div>
         </div>
-</div>
+    </div>
 </body>
+<script>
+    async function fetchRecipes() {
+        const { data, error } = await db
+            .from('Recipes')
+            .select('*')
+            .order('title', { ascending: true });
+
+        if (error) {
+            console.error('Error fetching recipes:', error);
+        } else {
+            console.log('Recipes:', data);
+            // You can add code here to dynamically display recipes on the homepage
+            const recipeContainer = document.getElementById('recipe-container');
+            recipeContainer.innerHTML = ''; // Clear existing content
+            data.forEach(recipe => {
+                const recipeDiv = document.createElement('div');
+                recipeDiv.className = 'dumplings-container';
+                recipeDiv.innerHTML = `
+                    <a href="../recipeDetails/index.html?id=${recipe.id}">
+                        <img src="${recipe.image}" alt="${recipe.title} image">
+                    </a>
+                    <h4>${recipe.title}</h4>
+                `;
+                recipeContainer.appendChild(recipeDiv);
+            });
+        }
+    }
+    fetchRecipes();
+</script>
+
 </html>
