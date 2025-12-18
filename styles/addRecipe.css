@@ -1,0 +1,89 @@
+html {
+    background-color: #d4bc9f;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    font-size: 18px;
+    color: #42382e;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.recipe-name {
+    grid-area: recipe-name;
+}
+
+.difficulty {
+    grid-area: difficulty;
+}
+
+.total-time {
+    grid-area: total-time;
+}
+
+.ingredients {
+    grid-area: ingredients;
+}
+
+.steps {
+    grid-area: steps;
+}
+
+.recipe-image {
+    grid-area: recipe-image;
+    width: 300px;
+    height: auto;
+}
+
+.recipe-image img {
+    display: none;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.add-recipe-grid {
+    display: grid;
+    grid-template-areas:
+        "recipe-name recipe-name"
+        "difficulty total-time"
+        "recipe-image steps"
+        "ingredients steps";
+    gap: 30px;
+    background-color: #f5f2f0;
+    padding: 20px;
+    border-radius: 10px;
+    align-items: end;
+}
+
+textarea,
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #8c6d5c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 20px;
+}

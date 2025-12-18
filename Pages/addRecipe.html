@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Recipe</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://ytbfokayjuwdovzygubt.supabase.co/';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0YmZva2F5anV3ZG92enlndWJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NTMyNDAsImV4cCI6MjA3NjAyOTI0MH0.lZv12D29lHDWYvmmolZbGBjuB6JMwdZB1SVIE52YmVg';
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    </script>
+    <link rel="stylesheet" href="../styles/addRecipe.css">
+</head>
+
+<body>
+    <h1>Add New Recipe</h1>
+    <div class="add-recipe-grid">
+        <div class="recipe-name">
+            <label>Recipe name:</label><br>
+            <input type="text" id="recipe-name" name="recipe-name" required><br><br>
+        </div>
+
+        <div class="difficulty">
+            <label>Difficulty:</label><br>
+            <input type="text" id="difficulty-value" name="difficulty" required><br><br>
+        </div>
+        <div class="total-time">
+            <label>Total Time (in minutes):</label><br>
+            <input type="number" id="total-time" name="total-time" required><br><br>
+        </div>
+        <div class="ingredients">
+            <label>Ingredients (separate by commas):</label><br>
+            <textarea id="ingredients" name="ingredients" rows="4" cols="50" required></textarea><br><br>
+        </div>
+        <div class="steps">
+            <label> Steps (separate by line breaks):</label><br>
+            <textarea id="steps" name="steps" rows="6" cols="50" required></textarea><br><br>
+        </div>
+        <div class="recipe-image">
+            <img id="recipe-image" src="../Images/Food 2.png" alt="">
+        </div>
+    </div>
+    <button type="submit" onclick="addRecipe()">Add Recipe</button>
+</body>
+<script>
+    async function addRecipe() {
+        const recipeName = document.getElementById('recipe-name').value;
+        const difficulty = document.getElementById('difficulty-value').value;
+        const totalTime = parseInt(document.getElementById('total-time').value);
+        const ingredients = document.getElementById('ingredients').value.split('\n').map(ing => ing.trim());
+        const steps = document.getElementById('steps').value.replace(/\n/g, '<br>');
+        const owner = localStorage.getItem("user_id");
+        const recipeImage = document.getElementById('recipe-image').src;
+        const { data, error } = await db
+            .from('Recipes')
+            .insert([
+                {
+                    title: recipeName,
+                    difficulty: difficulty,
+                    time: totalTime,
+                    image: recipeImage,
+                    steps: steps,
+                    ingredients: ingredients,
+                    owner: owner,
+                }
+            ]);
+        if (error) {
+            console.error('Error adding recipe:', error);
+            alert('There was an error adding your recipe. Please try again.');
+        } else {
+            console.log('Recipe added successfully:', data);
+            alert('Recipe added successfully!');
+            window.location.href = "../myRecipes/index.html";
+        }
+    }
+</script>
+
+</html>

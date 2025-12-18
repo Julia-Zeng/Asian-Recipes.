@@ -29,63 +29,10 @@
 
     <div id="ingredients" class="ingredients">
         <h2>Ingredients:</h2>
-        <label>
-            <input type="checkbox">
-            <span>Any green leafy vegetable (e.g. Spinach)</span>
-        </label>
-
-        <label>
-            <input type="checkbox">
-            <span>360g of ground pork</span>
-        </label>
-
-        <label>
-            <input type="checkbox">
-            <span>160ml of coocking wine</span>
-        </label>
-
-        <label>
-            <input type="checkbox">
-            <span>120ml neutral oil</span>
-        </label>
-        <label>
-            <input type="checkbox">
-            <span>5ml sesame oil</span>
-        </label>
-
-        <label>
-            <input type="checkbox">
-            <span>1tbs of salt</span>
-        </label>
-
-        <label>
-            <input type="checkbox">
-            <span>45ml soy sauce</span>
-        </label>
-
-        <label>
-            <input type="checkbox">
-            <span>0.25tbs of white pepper</span>
-        </label>
-
-        <label>
-            <input type="checkbox">
-            <span>160ml of water</span>
-        </label>
-
-        <label>
-            <input type="checkbox">
-            <span>3 packages of dumpling wrappers</span>
-        </label>
     </div>
 
     <div id="steps" class="steps">
         <h2>Step-by-step Instructions</h2>
-        <ol>
-            <li>Coffee</li>
-            <li>Tea</li>
-            <li>Milk</li>
-        </ol>
     </div>
 
 </body>
@@ -104,6 +51,17 @@
             document.getElementById('title').innerHTML = `<h1>${recipe.data[0].title}</h1>`;
             document.getElementById('subtitle').innerHTML = `<h3> Difficulty level: ${recipe.data[0].difficulty} | Total Time: ${recipe.data[0].time}</h3>`;
             document.getElementById('recipe-image').innerHTML = `<img src="${recipe.data[0].image}" alt="${recipe.data[0].title} image">`;
+            const steps = document.createElement('p');
+            steps.innerHTML = `<p>${recipe.data[0].steps}</p>`;
+            document.getElementById('steps').appendChild(steps);
+            for (const ingredient of recipe.data[0].ingredients) {
+                const label = document.createElement('label');
+                label.innerHTML = `
+                    <input type="checkbox">
+                    <span>${ingredient}</span>
+                `;
+                document.getElementById('ingredients').appendChild(label);
+            }
         }
     }
     getRecipe();
