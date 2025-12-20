@@ -16,7 +16,6 @@
 
 <body id="my-body">
     <div id="title" class="title">
-        <h1></h1>
     </div>
     <hr id="divider">
     <div id="subtitle" class="difficulty">
@@ -35,6 +34,18 @@
         <h2>Step-by-step Instructions</h2>
     </div>
 
+    <div class="comment-section">
+        <div class="add-comment">
+            <h3>Rate this Recipe</h3>
+            <div id="stars"></div>
+            <textarea id="comment-box"></textarea>
+            <button type="submit" id="submit-comment" onclick="createNewComment()">POST</button>
+        </div>
+        <div class="comments-display">
+            <h3>Comments</h3>
+            <div id="comments-container"></div>
+        </div>
+
 </body>
 <script>
     async function getRecipe() {
@@ -47,13 +58,9 @@
         if (recipe.error) {
             console.error(recipe.error);
         } else {
-            console.log('Recipe:', recipe.data[0]);
-            document.getElementById('title').innerHTML = `<h1>${recipe.data[0].title}</h1>`;
+            document.getElementById('title').innerHTML = `<h1>${recipe.data[0].title}</h1><button id="favorite-button" onclick="toggleFavorite()">♡</button>`;
             document.getElementById('subtitle').innerHTML = `<h3> Difficulty level: ${recipe.data[0].difficulty} | Total Time: ${recipe.data[0].time}</h3>`;
             document.getElementById('recipe-image').innerHTML = `<img src="${recipe.data[0].image}" alt="${recipe.data[0].title} image">`;
-            const steps = document.createElement('p');
-            steps.innerHTML = `<p>${recipe.data[0].steps}</p>`;
-            document.getElementById('steps').appendChild(steps);
             for (const ingredient of recipe.data[0].ingredients) {
                 const label = document.createElement('label');
                 label.innerHTML = `
@@ -62,9 +69,118 @@
                 `;
                 document.getElementById('ingredients').appendChild(label);
             }
+            let stepNumber = 1;
+            for (const steps of recipe.data[0].steps) {
+                const label = document.createElement('label');
+                label.innerHTML = `
+                    <div class="step-number">${stepNumber++}</div>
+                    <p>${steps}</p>
+                    <br>
+                `;
+                document.getElementById('steps').appendChild(label);
+            }
+            // button id="favorite-button" onclick="toggleFavorite()">♡</button>
         }
+        /*
+        const favResult = await db.
+            from('Favorites')
+            .select('*')
+            .eq('recipe_id', recipeId)
+            .eq('user_id', localStorage.getItem("user_id"));
+        if (favResult.error) {
+            console.error(favResult.error);
+        } else {
+            console.log('Favorite check:', favResult.data);
+            const favButton = document.createElement('button');
+            favButton.id = 'favorite-button';
+            favButton.onclick = toggleFavorite;
+            if (favResult.data.length > 0) {
+                favButton.innerText = '♥';
+            } else {
+                favButton.innerText = '♡';
+            }
+            document.getElementById('title').appendChild(favButton);
+        }*/
     }
     getRecipe();
+    async function createNewComment() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const recipeId = urlParams.get('id');
+        const userId = localStorage.getItem("user_id");
+        const commentText = document.getElementById('comment-box').value;
+        const { data, error } = await db
+            .from('comments')
+            .insert([
+                { recipe_id: recipeId, user_id: userId, comment: commentText, rate: 4 }
+            ]);
+        if (error) {
+            console.error('Error adding comment:', error);
+        } else {
+            console.log('Comment added successfully:', data);
+            alert('Comment added successfully!');
+            await loadComments();
+        }
+    }
+    async function loadComments() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const recipeId = urlParams.get('id');
+        const { data, error } = await db
+            .from('comments')
+            .select('comment, Users ( email ), rate')
+            .eq('recipe_id', recipeId)
+            ;
+        if (error) {
+            console.error('Error fetching comments:', error);
+        } else {
+            console.log('Comments:', data);
+            const commentsContainer = document.getElementById('comments-container');
+            commentsContainer.innerHTML = '';
+            data.forEach(comment => {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment';
+                commentDiv.innerHTML = `
+                    <h4>${comment.Users.email} - Rating: ${comment.rate} stars</h4>
+                    <p>${comment.comment}</p>
+                `;
+                commentsContainer.appendChild(commentDiv);
+            });
+        }
+    }
+    loadComments();
+
+    async function toggleFavorite() {
+        const favButton = document.getElementById('favorite-button');
+        const urlParams = new URLSearchParams(window.location.search);
+        const recipeId = urlParams.get('id');
+        const userId = localStorage.getItem("user_id");
+        if (favButton.innerText === '♡') {
+            const { data, error } = await db
+                .from('Favorites')
+                .insert([
+                    { recipe_id: recipeId, user_id: userId }
+                ]);
+            if (error) {
+                console.error('Error adding favorite:', error);
+            } else {
+                console.log('Favorite added successfully:', data);
+                favButton.innerText = '♥';
+                alert('Favorite added successfully!');
+            }
+        } else {
+            const { data, error } = await db
+                .from('Favorites')
+                .delete()
+                .eq('recipe_id', recipeId)
+                .eq('user_id', userId);
+            if (error) {
+                console.error('Error deleting favorite:', error);
+            } else {
+                console.log('Favorite deleted successfully:', data);
+                favButton.innerText = '♡';
+                alert('Favorite deleted successfully!');
+            }
+        }
+    }
 </script>
 
 </html>

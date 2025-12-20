@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>My Account</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>My Account</title>
 </head>
+
 <body>
-    <div class="sidebar">
-        <h3 class="sidebar-title" href="#">Menu Bar</h3>
-        <a href="../allRecipes/index.html">All Recipes</a>
-        <a href="../myAccount/index.html">My Account</a>
-        <a href="../myRecipes/index.html">My Recipes</a>
-    </div>
-
-<div class="searchbar">
-  <div class="search-container">
-    <form action="/action_page.php">
-      <input type="text" placeholder="Search.." name="search">
-    </form>
+  <div class="sidebar">
+    <h3 class="sidebar-title" href="#">Menu Bar</h3>
+    <a href="../allRecipes/index.html">All Recipes</a>
+    <a href="../myAccount/index.html">My Account</a>
+    <a href="../myRecipes/index.html">My Recipes</a>
   </div>
-</div>
 
-<div class="content">
+  <div class="searchbar">
+    <div class="search-container">
+      <form action="/action_page.php">
+        <input type="text" placeholder="Search.." name="search">
+      </form>
+    </div>
+  </div>
+
+  <div class="content">
     <div class="header">
-        <h1>
-            My Account
-        </h1>
-</div>
+      <h1>
+        My Account
+      </h1>
+    </div>
+    <h1>Personal Information</h1>
+    <b>Email/Username:</b>
+    <p id="user-email"></p>
+    <b>Password:</b>
+    <p id="user-password"></p>
+    <a href="../Pages/favourites.html">Liked Recipes</a>
+    <button onclick="logout()">Logout</button>
+  </div>
 </body>
+
 </html>

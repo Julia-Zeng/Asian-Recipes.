@@ -12,7 +12,8 @@ body {
         "divider divider"
         "subtitle subtitle"
         "recipe-image steps"
-        "ingredients steps";
+        "ingredients steps"
+        "comment-section comment-section";
 }
 
 #title {
@@ -37,19 +38,75 @@ body {
 }
 
 #recipe-image img {
-    width: 300px;
-    height:300px;
+    width: 500px;
+    height: 500px;
     border-radius: 10px;
     object-fit: cover;
+    margin: 50px;
+    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 #ingredients {
     grid-area: ingredients;
+    margin: 50px;
+    background-color: #f5f2f0;
+    color: #42382e;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
 }
 
 #steps {
     grid-area: steps;
+    background-color: #f5f2f0;
+    border-radius: 10px;
+    padding: 20px;
+    padding-top: 5px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
+.step-number {
+    font-weight: bold;
+    margin-right: 10px;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 50%;
+    padding: 4px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.comment-section {
+    grid-area: comment-section;
+    display: grid;
+    grid-template-areas:
+        "add-comment comments-display";
+}
 
+.add-comment {
+    grid-area: add-comment;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 12px;
+}
+
+.comments-display {
+    grid-area: comments-display;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 12px;
+}

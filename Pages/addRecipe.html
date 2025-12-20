@@ -50,7 +50,7 @@
         const difficulty = document.getElementById('difficulty-value').value;
         const totalTime = parseInt(document.getElementById('total-time').value);
         const ingredients = document.getElementById('ingredients').value.split('\n').map(ing => ing.trim());
-        const steps = document.getElementById('steps').value.replace(/\n/g, '<br>');
+        const steps = document.getElementById('steps').value.split('\n').map(ing => ing.trim());
         const owner = localStorage.getItem("user_id");
         const recipeImage = document.getElementById('recipe-image').src;
         const { data, error } = await db

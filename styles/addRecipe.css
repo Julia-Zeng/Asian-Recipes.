@@ -2,6 +2,10 @@ html {
     background-color: #d4bc9f;
 }
 
+h1 {
+    font-size: 45px;
+}
+
 form label {
     display: block;
     margin-top: 15px;
