@@ -252,3 +252,16 @@ html {
   top: 20px;
   left: 265px;
 }
+
+#recipe-results-container {
+  display: none;
+  position: absolute;
+  background-color: white;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 300px;
+  z-index: 1000;
+  top: 49px;
+  right: 20px;
+  padding: 10px;
+}
