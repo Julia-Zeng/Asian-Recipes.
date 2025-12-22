@@ -6,6 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
   <title>My Account</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://ytbfokayjuwdovzygubt.supabase.co/';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0YmZva2F5anV3ZG92enlndWJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NTMyNDAsImV4cCI6MjA3NjAyOTI0MH0.lZv12D29lHDWYvmmolZbGBjuB6JMwdZB1SVIE52YmVg';
+    const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  </script>
 </head>
 
 <body>
@@ -23,6 +29,7 @@
       </form>
     </div>
   </div>
+  <a href="../HomePage/index.html"><img class="home-button" src="../Images/home.png" alt=""></a>
 
   <div class="content">
     <div class="header">
@@ -35,9 +42,26 @@
     <p id="user-email"></p>
     <b>Password:</b>
     <p id="user-password"></p>
+    <a href="../Pages/editAccount.html">Edit Information</a>
     <a href="../Pages/favourites.html">Liked Recipes</a>
     <button onclick="logout()">Logout</button>
   </div>
 </body>
+<script>
+  async function getUserInfo() {
+    const user = await db.from('Users').select('*').eq('id', localStorage.getItem('user_id'));
+    if (user.error) {
+      console.error(user.error);
+    } else {
+      document.getElementById('user-email').innerText = user.data[0].email;
+      document.getElementById('user-password').innerText = user.data[0].password.replace(/./g, '*');
+    }
+  }
+  getUserInfo();
+  function logout() {
+    localStorage.removeItem('user_id');
+    window.location.href = '../LogIn/index.html';
+  }
+</script>
 
 </html>

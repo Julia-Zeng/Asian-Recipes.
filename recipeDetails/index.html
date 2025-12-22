@@ -15,6 +15,8 @@
 </head>
 
 <body id="my-body">
+    <a href="../HomePage/index.html"><img class="home-button" src="../Images/home.png" alt=""></a>
+
     <div id="title" class="title">
     </div>
     <hr id="divider">
@@ -58,7 +60,7 @@
         if (recipe.error) {
             console.error(recipe.error);
         } else {
-            document.getElementById('title').innerHTML = `<h1>${recipe.data[0].title}</h1><button id="favorite-button" onclick="toggleFavorite()">♡</button>`;
+            document.getElementById('title').innerHTML = `<h1>${recipe.data[0].title}</h1>`;
             document.getElementById('subtitle').innerHTML = `<h3> Difficulty level: ${recipe.data[0].difficulty} | Total Time: ${recipe.data[0].time}</h3>`;
             document.getElementById('recipe-image').innerHTML = `<img src="${recipe.data[0].image}" alt="${recipe.data[0].title} image">`;
             for (const ingredient of recipe.data[0].ingredients) {
@@ -79,7 +81,27 @@
                 `;
                 document.getElementById('steps').appendChild(label);
             }
-            // button id="favorite-button" onclick="toggleFavorite()">♡</button>
+            // <button id="favorite-button" onclick="toggleFavorite()">♡</button>
+        }
+        console.log('Checking favorite status for recipe ID:', recipeId);
+        const favResult = await db.
+            from('Favorites')
+            .select('*')
+            .eq('recipe_id', recipeId)
+            .eq('user_id', localStorage.getItem("user_id"));
+        if (favResult.error) {
+            console.error(favResult.error);
+        } else {
+            console.log('Favorite check:', favResult.data);
+            const favButton = document.createElement('button');
+            favButton.id = 'favorite-button';
+            favButton.onclick = toggleFavorite;
+            if (favResult.data.length > 0) {
+                favButton.innerText = '♥';
+            } else {
+                favButton.innerText = '♡';
+            }
+            document.getElementById('title').appendChild(favButton);
         }
         /*
         const favResult = await db.
@@ -132,7 +154,6 @@
         if (error) {
             console.error('Error fetching comments:', error);
         } else {
-            console.log('Comments:', data);
             const commentsContainer = document.getElementById('comments-container');
             commentsContainer.innerHTML = '';
             data.forEach(comment => {

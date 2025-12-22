@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../myAccount/styles.css">
+    <title>My Account</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://ytbfokayjuwdovzygubt.supabase.co/';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0YmZva2F5anV3ZG92enlndWJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NTMyNDAsImV4cCI6MjA3NjAyOTI0MH0.lZv12D29lHDWYvmmolZbGBjuB6JMwdZB1SVIE52YmVg';
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    </script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h3 class="sidebar-title" href="#">Menu Bar</h3>
+        <a href="../allRecipes/index.html">All Recipes</a>
+        <a href="../myAccount/index.html">My Account</a>
+        <a href="../myRecipes/index.html">My Recipes</a>
+    </div>
+
+    <div class="searchbar">
+        <div class="search-container">
+            <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+            </form>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="header">
+            <h1>
+                My Account
+            </h1>
+        </div>
+        <h1>Personal Information</h1>
+        <b>Email/Username:</b>
+        <input id="user-email"></input>
+        <b>Password:</b>
+        <input id="user-password" type="password" onfocus="showPassword()" onblur="hidePassword()"></input>
+        <button onclick="save()">Save</button>
+    </div>
+</body>
+<script>
+    async function getUserInfo() {
+        const user = await db.from('Users').select('*').eq('id', localStorage.getItem('user_id'));
+        if (user.error) {
+            console.error(user.error);
+        } else {
+            document.getElementById('user-email').value = user.data[0].email;
+            document.getElementById('user-password').value = user.data[0].password;
+        }
+    }
+    getUserInfo();
+    function showPassword() {
+        document.getElementById('user-password').type = 'text';
+    }
+    function hidePassword() {
+        document.getElementById('user-password').type = 'password';
+    }
+    async function save() {
+        const response = await db.from('Users').update({
+            email: document.getElementById('user-email').value,
+            password: document.getElementById('user-password').value
+        }).eq('id', localStorage.getItem('user_id'));
+        if (response.error) {
+            console.error(response.error);
+        } else {
+            alert('Information updated successfully!');
+            window.location.href = "../myAccount/index.html";
+        }
+    }
+
+</script>
+
+</html>
