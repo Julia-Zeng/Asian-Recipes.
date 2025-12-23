@@ -26,7 +26,7 @@
     </div>
     <hr id="divider">
     <div id="subtitle" class="difficulty">
-        <h3>Difficulty level: Easy | Total Time: 15 min | stars</h3>
+        <h3>Difficulty level: Easy | Total Time: 15 min |</h3>
     </div>
 
     <div id="recipe-image" class="dumplings-container1">
@@ -67,7 +67,7 @@
             console.error(recipe.error);
         } else {
             document.getElementById('recipe-title').innerText = `${recipe.data[0].title}`;
-            document.getElementById('subtitle').innerHTML = `<h3> Difficulty level: ${recipe.data[0].difficulty} | Total Time: ${recipe.data[0].time}</h3>`;
+            document.getElementById('subtitle').innerHTML = `<h3> Difficulty level: ${recipe.data[0].difficulty} | Total Time: ${recipe.data[0].time}</h3> <div id="average-rating"></div>`;
             document.getElementById('recipe-image').innerHTML = `<img src="${recipe.data[0].image}" alt="${recipe.data[0].title} image">`;
             for (const ingredient of recipe.data[0].ingredients) {
                 const label = document.createElement('label');
@@ -152,14 +152,15 @@
         const { data, error } = await db
             .from('comments')
             .select('comment, Users ( email ), rate')
-            .eq('recipe_id', recipeId)
-            ;
+            .eq('recipe_id', recipeId);
         if (error) {
             console.error('Error fetching comments:', error);
         } else {
             const commentsContainer = document.getElementById('comments-container');
             commentsContainer.innerHTML = '';
+            let average = 0;
             data.forEach(comment => {
+                average += comment.rate;
                 const commentDiv = document.createElement('div');
                 commentDiv.className = 'comment';
                 commentDiv.innerHTML = `
@@ -168,6 +169,8 @@
                 `;
                 commentsContainer.appendChild(commentDiv);
             });
+            average = data.length ? (average / data.length) : 0;
+            document.getElementById('average-rating').innerHTML = getStarRatingHTMLComment(average);
         }
     }
     loadComments();
