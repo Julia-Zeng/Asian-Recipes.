@@ -8,6 +8,7 @@ body {
 #my-body {
     display: grid;
     grid-template-areas:
+        "title-container title-container"
         "title title"
         "divider divider"
         "subtitle subtitle"
@@ -114,7 +115,19 @@ body {
 .home-button {
     width: 50px;
     height: 50px;
-    position: fixed;
-    top: 20px;
-    left: 50px;
+}
+
+#title-container {
+    grid-area: title-container;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 0px 20px;
+}
+
+.user-buttons {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    padding: 20px 4px;
 }

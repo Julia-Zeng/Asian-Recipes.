@@ -15,7 +15,12 @@
 </head>
 
 <body id="my-body">
-    <a href="../HomePage/index.html"><img class="home-button" src="../Images/home.png" alt=""></a>
+    <div id="title-container">
+        <a href="../HomePage/index.html" id="home-button"><img class="home-button" src="../Images/home.png" alt=""></a>
+        <h1 id="recipe-title"></h1>
+        <div id="user-buttons"></div>
+    </div>
+
 
     <div id="title" class="title">
     </div>
@@ -60,7 +65,7 @@
         if (recipe.error) {
             console.error(recipe.error);
         } else {
-            document.getElementById('title').innerHTML = `<h1>${recipe.data[0].title}</h1>`;
+            document.getElementById('recipe-title').innerText = `${recipe.data[0].title}`;
             document.getElementById('subtitle').innerHTML = `<h3> Difficulty level: ${recipe.data[0].difficulty} | Total Time: ${recipe.data[0].time}</h3>`;
             document.getElementById('recipe-image').innerHTML = `<img src="${recipe.data[0].image}" alt="${recipe.data[0].title} image">`;
             for (const ingredient of recipe.data[0].ingredients) {
@@ -93,36 +98,33 @@
             console.error(favResult.error);
         } else {
             console.log('Favorite check:', favResult.data);
-            const favButton = document.createElement('button');
+            const favButton = document.createElement('img');
             favButton.id = 'favorite-button';
+            favButton.className = 'user-buttons';
             favButton.onclick = toggleFavorite;
             if (favResult.data.length > 0) {
-                favButton.innerText = '♥';
+                favButton.src = '../Images/fullHeart.png';
             } else {
-                favButton.innerText = '♡';
+                favButton.src = '../Images/heart.png';
             }
-            document.getElementById('title').appendChild(favButton);
+            document.getElementById('user-buttons').appendChild(favButton);
         }
-        /*
-        const favResult = await db.
-            from('Favorites')
-            .select('*')
-            .eq('recipe_id', recipeId)
-            .eq('user_id', localStorage.getItem("user_id"));
-        if (favResult.error) {
-            console.error(favResult.error);
-        } else {
-            console.log('Favorite check:', favResult.data);
-            const favButton = document.createElement('button');
-            favButton.id = 'favorite-button';
-            favButton.onclick = toggleFavorite;
-            if (favResult.data.length > 0) {
-                favButton.innerText = '♥';
-            } else {
-                favButton.innerText = '♡';
-            }
-            document.getElementById('title').appendChild(favButton);
-        }*/
+        if (localStorage.getItem("user_id") == recipe.data[0].owner) {
+            document.getElementById("home-button").style.paddingRight = "72px";
+            const editButton = document.createElement('img');
+            editButton.id = 'edit-button';
+            editButton.className = 'user-buttons';
+            editButton.src = '../Images/lapiz.png';
+            editButton.onclick = goToEditPage;
+            document.getElementById('user-buttons').appendChild(editButton);
+
+            const deleteButton = document.createElement('img');
+            deleteButton.id = 'delete-button';
+            deleteButton.className = 'user-buttons';
+            deleteButton.onclick = deleteRecipe;
+            deleteButton.src = '../Images/bin.png';
+            document.getElementById('user-buttons').appendChild(deleteButton);
+        }
     }
     getRecipe();
     async function createNewComment() {
@@ -174,7 +176,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const recipeId = urlParams.get('id');
         const userId = localStorage.getItem("user_id");
-        if (favButton.innerText === '♡') {
+        if (favButton.src.includes('heart.png')) {
             const { data, error } = await db
                 .from('Favorites')
                 .insert([
@@ -184,7 +186,7 @@
                 console.error('Error adding favorite:', error);
             } else {
                 console.log('Favorite added successfully:', data);
-                favButton.innerText = '♥';
+                favButton.src = '../Images/fullHeart.png';
                 alert('Favorite added successfully!');
             }
         } else {
@@ -197,10 +199,31 @@
                 console.error('Error deleting favorite:', error);
             } else {
                 console.log('Favorite deleted successfully:', data);
-                favButton.innerText = '♡';
+                favButton.src = '../Images/heart.png';
                 alert('Favorite deleted successfully!');
             }
         }
+    }
+
+    async function deleteRecipe() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const recipeId = urlParams.get('id');
+        const { data, error } = await db
+            .from('Recipes')
+            .delete()
+            .eq('id', recipeId);
+        if (error) {
+            console.error('Error deleting recipe:', error);
+        } else {
+            console.log('Recipe deleted successfully:', data);
+            alert('Recipe deleted successfully!');
+            window.location.href = '../HomePage/index.html';
+        }
+    }
+    function goToEditPage() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const recipeId = urlParams.get('id');
+        window.location.href = `../Pages/editRecipe.html?id=${recipeId}`;
     }
 </script>
 
