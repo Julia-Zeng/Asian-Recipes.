@@ -131,3 +131,9 @@ body {
     cursor: pointer;
     padding: 20px 4px;
 }
+
+.star {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}

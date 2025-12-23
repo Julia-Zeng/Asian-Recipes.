@@ -44,6 +44,7 @@
     <div class="comment-section">
         <div class="add-comment">
             <h3>Rate this Recipe</h3>
+            <input type="hidden" id="recipe-rate" value="0">
             <div id="stars"></div>
             <textarea id="comment-box"></textarea>
             <button type="submit" id="submit-comment" onclick="createNewComment()">POST</button>
@@ -135,7 +136,7 @@
         const { data, error } = await db
             .from('comments')
             .insert([
-                { recipe_id: recipeId, user_id: userId, comment: commentText, rate: 4 }
+                { recipe_id: recipeId, user_id: userId, comment: commentText, rate: document.getElementById('recipe-rate').value }
             ]);
         if (error) {
             console.error('Error adding comment:', error);
@@ -162,7 +163,7 @@
                 const commentDiv = document.createElement('div');
                 commentDiv.className = 'comment';
                 commentDiv.innerHTML = `
-                    <h4>${comment.Users.email} - Rating: ${comment.rate} stars</h4>
+                    <h4>${comment.Users.email} - Rating: ${getStarRatingHTMLComment(comment.rate)}</h4>
                     <p>${comment.comment}</p>
                 `;
                 commentsContainer.appendChild(commentDiv);
@@ -224,6 +225,27 @@
         const urlParams = new URLSearchParams(window.location.search);
         const recipeId = urlParams.get('id');
         window.location.href = `../Pages/editRecipe.html?id=${recipeId}`;
+    }
+    document.getElementById('stars').innerHTML = getStarRatingHTML(0);
+    function getStarRatingHTML(rating) {
+        let stars = [];
+        for (let i = 1; i <= 5; i++) {
+            const src = i <= rating ? '../Images/fullStar.png' : '../Images/emptyStar.png';
+            stars.push(`<img src="${src}" class="star" onclick="updateStarRating(${i})" alt="star" />`);
+        }
+        return stars.join('');
+    }
+    function getStarRatingHTMLComment(rating) {
+        let stars = [];
+        for (let i = 1; i <= 5; i++) {
+            const src = i <= rating ? '../Images/fullStar.png' : '../Images/emptyStar.png';
+            stars.push(`<img src="${src}" class="star" alt="star" />`);
+        }
+        return stars.join('');
+    }
+    function updateStarRating(rating) {
+        document.getElementById('recipe-rate').value = rating;
+        document.getElementById('stars').innerHTML = getStarRatingHTML(rating);
     }
 </script>
 
