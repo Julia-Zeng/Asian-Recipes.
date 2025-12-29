@@ -38,13 +38,41 @@
             <label> Steps (separate by line breaks):</label><br>
             <textarea id="steps" name="steps" rows="6" cols="50" required></textarea><br><br>
         </div>
-        <div class="recipe-image">
+        <div id="image-container" class="recipe-image">
             <img id="recipe-image" src="../Images/Food 2.png" alt="">
+            <input type="file" id="image-input" accept="image/*" style="display: none;">
         </div>
     </div>
     <button type="submit" onclick="addRecipe()">Add Recipe</button>
 </body>
 <script>
+    function imageInputSetup() {
+        const imageContainer = document.getElementById('image-container');
+        const imageInput = document.getElementById('image-input');
+        const displayImage = document.getElementById('recipe-image');
+
+        // 1. When the container is clicked, open the file browser
+        imageContainer.addEventListener('click', () => {
+            imageInput.click();
+        });
+
+        // 2. When a file is selected, update the image src
+        imageInput.addEventListener('change', function () {
+            const file = this.files[0]; // Get the selected file
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    // Set the image src to the result of the FileReader
+                    displayImage.setAttribute('src', e.target.result);
+                }
+
+                reader.readAsDataURL(file); // Convert the image to a base64 string
+            }
+        });
+    }
+    imageInputSetup();
     async function addRecipe() {
         const recipeName = document.getElementById('recipe-name').value;
         const difficulty = document.getElementById('difficulty-value').value;

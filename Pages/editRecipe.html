@@ -60,6 +60,7 @@
             document.getElementById('total-time').value = recipe.data[0].time;
             document.getElementById('ingredients').value = recipe.data[0].ingredients.join('\n');
             document.getElementById('steps').value = recipe.data[0].steps.join('\n');
+            document.getElementById('recipe-image').src = recipe.data[0].image;
         }
     }
     getRecipe();
