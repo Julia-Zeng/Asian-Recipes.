@@ -26,9 +26,9 @@
 
     <div class="searchbar">
         <div class="search-container">
-            <form action="/action_page.php">
-                <input type="text" placeholder="Search.." name="search">
-            </form>
+            <input type="text" placeholder="Search.." name="search" oninput="searchRecipe(event)"
+                onblur="closeSearchResults()">
+            <div id="recipe-results-container"></div>
         </div>
     </div>
 
@@ -69,6 +69,51 @@
         }
     }
     fetchRecipes();
+    async function searchRecipe(event) {
+        const query = event.target.value;
+        if (query.length === 0) {
+            document.getElementById('recipe-results-container').innerHTML = '';
+            document.getElementById('recipe-results-container').style.display = 'none';
+            return;
+        }
+        const { data, error } = await db
+            .from('Recipes')
+            .select('*')
+            .ilike('title', `%${query}%`)
+            .order('title', { ascending: true });
+
+        if (error) {
+            console.error('Error searching recipes:', error);
+        } else {
+            console.log('Search results:', data);
+            const resultsContainer = document.getElementById('recipe-results-container');
+            resultsContainer.innerHTML = ''; // Clear previous results
+            if (data.length > 0) {
+                resultsContainer.style.display = 'block';
+            } else {
+                resultsContainer.style.display = 'none';
+                return;
+            }
+            data.forEach(recipe => {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'search-result';
+                resultDiv.innerHTML = `
+                        <h4 onmousedown="navigateToRecipe(${recipe.id})" class="auto-complete-title">${recipe.title}</h4>
+                `;
+                resultsContainer.appendChild(resultDiv);
+                const divider = document.createElement('hr');
+                if (recipe !== data[data.length - 1]) {
+                    resultsContainer.appendChild(divider);
+                }
+            });
+        }
+    }
+    function closeSearchResults() {
+        document.getElementById('recipe-results-container').style.display = 'none';
+    }
+    function navigateToRecipe(recipeId) {
+        window.location.href = `../recipeDetails/index.html?id=${recipeId}`;
+    }
 </script>
 
 </html>
