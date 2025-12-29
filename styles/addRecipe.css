@@ -44,8 +44,9 @@ body {
 
 .recipe-image {
     grid-area: recipe-image;
-    width: 300px;
+    width: 200px;
     height: auto;
+    cursor: pointer;
 }
 
 .recipe-image img {

@@ -163,7 +163,7 @@
                 const commentDiv = document.createElement('div');
                 commentDiv.className = 'comment';
                 commentDiv.innerHTML = `
-                    <h4>${comment.Users.email} - Rating: ${getStarRatingHTMLComment(comment.rate)}</h4>
+                    <h4 style="display: flex; flex-direction: row; align-items: center;">${comment.Users.email} - Rating: ${getStarRatingHTMLComment(comment.rate)}</h4>
                     <p>${comment.comment}</p>
                 `;
                 commentsContainer.appendChild(commentDiv);
