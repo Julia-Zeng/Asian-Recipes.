@@ -19,7 +19,8 @@
   async function createUser() {
     let email = document.getElementById("email-input").value;
     let password = document.getElementById("password-input").value;
-    await db.from("Users").insert([{ email: email, password: password }])
+    let username = document.getElementById("username-input").value;
+    await db.from("Users").insert([{ email: email, password: password, username: username }])
     alert("User Created!")
     window.location.href = "../LogIn/index.html";
   }
@@ -77,26 +78,33 @@
 </head>
 
 <body>
-  <h1>Sign Up</h1>
+  <div class="singup-content">
+    <h1>Sign Up</h1>
+    <div class="email-container">
+      <label for="email">Email:</label>
+      <input type="text" id="email-input">
+    </div>
 
-  <div class="email-container">
-    <label for="email">Email:</label>
-    <input type="text" id="email-input">
+    <div class="email-container">
+      <label for="username">Username:</label>
+      <input type="text" id="username-input">
+    </div>
+
+    <div class="password-container">
+      <div class="input-container input-container-password"> </div>
+      <label for="password">Password:</label>
+      <input type="password" id="password-input">
+      <label style="margin-left:8px;">
+        <input type="checkbox" id="show-password" onclick="togglePassword()">
+        Show password
+      </label>
+    </div>
+
+    <div class="button-container">
+      <button onclick="createUser()">Create User</button>
+    </div>
   </div>
 
-  <div class="password-container">
-    <div class="input-container input-container-password"> </div>
-    <label for="password">Password:</label>
-    <input type="password" id="password-input">
-    <label style="margin-left:8px;">
-      <input type="checkbox" id="show-password" onclick="togglePassword()">
-      Show password
-    </label>
-  </div>
-
-  <div class="button-container">
-    <button onclick="createUser()">Create User</button>
-  </div>
 
   <script>
     function togglePassword() {

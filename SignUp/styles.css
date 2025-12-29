@@ -1,28 +1,24 @@
 body {
- /* border: 3px solid green; */
+    /* border: 3px solid green; */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background-color: #d4bc9f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-h1{
+h1 {
     /*border: 3px solid blue; */
     font-size: 70px;
     color: #ffffff;
     text-align: center;
-    position: absolute;
-    left: 50%;
-    top: 200px;
-    transform: translate(-50%, -50%);
 }
 
 .email-container {
-    /*border: 3px solid red;*/
-    position: absolute;
-    left: 50%;
-    top: 320px;
-    transform: translate(-50%, 0);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,11 +27,6 @@ h1{
 }
 
 .password-container {
-    /*border: 3px solid orange;*/
-    position: absolute;
-    left: 50%;
-    top: 380px;
-    transform: translate(-50%, 0);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,22 +35,18 @@ h1{
 }
 
 .button-container {
-    /*border: 3px solid blue;*/
-    position: absolute;
-    left: 50%;
-    top: 500px;
-    transform: translate(-50%, -50%);
     width: 100px;
 }
 
-.image-container2 img{
+.image-container2 img {
     /*border: 3px solid blue;*/
     position: absolute;
     top: 0;
     left: 80px;
     max-width: 250px;
 }
-.image-container3 img{
+
+.image-container3 img {
     /*border: 3px solid blue;*/
     position: absolute;
     top: 0;
@@ -67,3 +54,12 @@ h1{
     max-width: 250px;
 }
 
+.singup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    top: -80px;
+}
