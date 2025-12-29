@@ -98,9 +98,7 @@
                 const resultDiv = document.createElement('div');
                 resultDiv.className = 'search-result';
                 resultDiv.innerHTML = `
-                    <a href="../recipeDetails/index.html?id=${recipe.id}">
-                        <h4>${recipe.title}</h4>
-                    </a>
+                        <h4 onmousedown="navigateToRecipe(${recipe.id})" class="auto-complete-title">${recipe.title}</h4>
                 `;
                 resultsContainer.appendChild(resultDiv);
                 const divider = document.createElement('hr');
@@ -112,6 +110,9 @@
     }
     function closeSearchResults() {
         document.getElementById('recipe-results-container').style.display = 'none';
+    }
+    function navigateToRecipe(recipeId) {
+        window.location.href = `../recipeDetails/index.html?id=${recipeId}`;
     }
 </script>
 

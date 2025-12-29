@@ -245,10 +245,20 @@ html {
     margin-right: 16px;
 }
 
+.auto-complete {
+    text-decoration: none;
+}
+
+.auto-complete-title {
+    font-size: 18px;
+    color: #42382e;
+    margin: 0;
+}
+
 #recipe-results-container {
     display: none;
     position: absolute;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.5);
     max-height: 200px;
     overflow-y: auto;
     width: 300px;
@@ -256,4 +266,5 @@ html {
     top: 49px;
     right: 20px;
     padding: 10px;
+    border-radius: 10px;
 }
