@@ -23,12 +23,15 @@
       alert("Error logging in!");
       return;
     }
+    else {
+      localStorage.setItem("user_id", data[0].id);
+    }
+    
     if (data && data.length > 0) {
       window.location.href = "../HomePage/index.html";
     } else {
       alert("Invalid email or password.");
     }
-    localStorage.setItem("user_id", data[0].id);
     alert(localStorage.getItem("user_id")
     )
   }
