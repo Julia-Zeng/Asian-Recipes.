@@ -46,7 +46,8 @@
     async function fetchRecipes() {
         const { data, error } = await db
             .from('Favorites')
-            .select('*, Recipes(*)');
+            .select('*, Recipes(*)')
+            .eq('user_id', localStorage.getItem('user_id'));
 
         if (error) {
             console.error('Error fetching recipes:', error);

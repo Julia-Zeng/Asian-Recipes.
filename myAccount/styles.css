@@ -72,6 +72,18 @@ html {
   flex-direction: column;
 }
 
+.account-details {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 10px;
+}
+
+.account-details button {
+  width: fit-content;
+  font-family: inherit;
+}
+
 .title-border {
   border: 1px solid #42382e;
   border-radius: 10px;
