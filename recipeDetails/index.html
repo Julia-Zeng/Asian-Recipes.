@@ -128,12 +128,16 @@
     async function createNewComment() {
         const urlParams = new URLSearchParams(window.location.search);
         const recipeId = urlParams.get('id');
-        const userId = localStorage.getItem("user_id");
         const commentText = document.getElementById('comment-box').value;
+        const userId = localStorage.getItem("user_id");
         const { data, error } = await db
             .from('comments')
             .insert([
-                { recipe_id: recipeId, user_id: userId, comment: commentText, rate: document.getElementById('recipe-rate').value }
+                { recipe_id: recipeId, 
+                    user_id: userId, 
+                    comment: commentText, 
+                    rate: document.getElementById('recipe-rate').value 
+                }
             ]);
         if (error) {
             console.error('Error adding comment:', error);
